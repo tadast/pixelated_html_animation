@@ -7,7 +7,7 @@ Column = (function() {
     this.totalPositions = totalPositions;
     this.sceneWidth = sceneWidth;
     this.size = size != null ? size : 4;
-    this.speed = speed != null ? speed : 4;
+    this.speed = speed != null ? speed : 3;
     this.calculatePositions();
     this.domElm = document.createElement('div');
     this.domElm.setAttribute('class', 'slideCol');
@@ -24,18 +24,26 @@ Column = (function() {
       this.domElm.appendChild(dot);
     }
   }
-  Column.prototype.next = function(exitState) {
-    if (exitState || !this.reachedDestination()) {
-      this.right = Math.min(this.right + this.size * 4, this.destination);
-    } else if (!exitState) {
+  Column.prototype.next = function(exitState, compensate) {
+    if (compensate == null) {
+      compensate = 1;
+    }
+    if (exitState) {
+      this.advance(compensate);
+    } else if (!this.reachedDestination()) {
+      this.advance(compensate);
+      this.right = Math.min(this.right, this.destination);
+    } else {
       this.right = this.destination;
     }
     return this.domElm.style.right = "" + this.right + "px";
   };
+  Column.prototype.advance = function(compensate) {
+    return this.right = this.right + (this.size * this.speed * compensate);
+  };
   Column.prototype.calculatePositions = function() {
     this.initialPosition = -(6 * this.position * this.position) / 6;
     this.destination = this.sceneWidth / 2 + (this.totalPositions / 2 - this.position) * this.size;
-    console.log(this.destination);
     return this.right = this.initialPosition;
   };
   Column.prototype.reachedDestination = function() {

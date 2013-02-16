@@ -16,6 +16,7 @@ class Slide
     @cols.push(col)
 
   start: ->
+    @lastFrame = Date.now()
     requestAnimFrame( => @advanceFrame())
 
   resume: ->
@@ -23,8 +24,10 @@ class Slide
     @start()
 
   advanceFrame: ->
+    compFactor = @compFactor()
+    console.log compFactor
     for col in @cols
-      col.next(@pauseDone)
+      col.next(@pauseDone, compFactor)
 
     if @pauseDone
       if @cols[@cols.length - 1].reachedEnd()
@@ -39,3 +42,9 @@ class Slide
       else
         resume = =>@resume()
         window.setTimeout resume, @pauseLength
+
+  compFactor: ->
+    now = Date.now()
+    delta = now - @lastFrame
+    @lastFrame = now
+    delta / 17

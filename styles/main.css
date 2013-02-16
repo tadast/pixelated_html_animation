@@ -40,7 +40,7 @@ body{
 }
 
 .slideDot.full{
-  border-radius: 1px;
+  /*border-radius: 1px;*/
   background-color: white;
   opacity: 0.9;
 }

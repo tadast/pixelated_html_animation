@@ -24,6 +24,7 @@ Slide = (function() {
     return this.cols.push(col);
   };
   Slide.prototype.start = function() {
+    this.lastFrame = Date.now();
     return requestAnimFrame(__bind(function() {
       return this.advanceFrame();
     }, this));
@@ -33,11 +34,13 @@ Slide = (function() {
     return this.start();
   };
   Slide.prototype.advanceFrame = function() {
-    var col, resume, _i, _len, _ref;
+    var col, compFactor, resume, _i, _len, _ref;
+    compFactor = this.compFactor();
+    console.log(compFactor);
     _ref = this.cols;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       col = _ref[_i];
-      col.next(this.pauseDone);
+      col.next(this.pauseDone, compFactor);
     }
     if (this.pauseDone) {
       if (this.cols[this.cols.length - 1].reachedEnd()) {
@@ -60,6 +63,13 @@ Slide = (function() {
         return window.setTimeout(resume, this.pauseLength);
       }
     }
+  };
+  Slide.prototype.compFactor = function() {
+    var delta, now;
+    now = Date.now();
+    delta = now - this.lastFrame;
+    this.lastFrame = now;
+    return delta / 17;
   };
   return Slide;
 })();
