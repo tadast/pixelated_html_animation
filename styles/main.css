@@ -1,0 +1,50 @@
+html, body{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body{
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZGU5NDc4Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYzU0NDI5Ii8+PC9yYWRpYWxHcmFkaWVudD48cmVjdCB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNjNTQ0MjkiIC8+PHJlY3QgeD0iOC4wOTY5JSIgeT0iLTMyJSIgd2lkdGg9IjgzLjgwNjIlIiBoZWlnaHQ9IjE2NCUiIGZpbGw9InVybCgjZykiIC8+PC9zdmc+);
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 95, color-stop(0%, #de9478), color-stop(100%, #c54429));
+  background-image: -webkit-radial-gradient(center center, closest-side circle, #de9478 0%, #c54429 164%);
+  background-image: -moz-radial-gradient(center center, closest-side circle, #de9478 0%, #c54429 164%);
+  background-image: -ms-radial-gradient(center center, closest-side circle, #de9478 0%, #c54429 164%);
+  background-image: -o-radial-gradient(center center, closest-side circle, #de9478 0%, #c54429 164%);
+  background-image: radial-gradient(closest-side circle at center center, #de9478 0%, #c54429 164%);
+}
+
+#container{
+  min-height: 100%;
+  height: auto !important;
+  width: 100%;
+  background-image: url('images/over.png');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+#slide{
+  max-width: 100%;
+  overflow-x: hidden;
+  margin-top: 200px;
+  height: 150px;
+  position: relative;
+}
+
+.slideDot{
+  height: 3px;
+  width: 3px;
+  margin-left: 1px;
+  margin-bottom: 1px;
+}
+
+.slideDot.full{
+  border-radius: 1px;
+  background-color: white;
+  opacity: 0.9;
+}
+
+.slideCol{
+  position: absolute;
+}
