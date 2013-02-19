@@ -37,6 +37,7 @@ body{
   width: 3px;
   margin-left: 1px;
   margin-bottom: 1px;
+  border-radius: 1px;
 }
 
 .slideDot.full{
@@ -47,4 +48,8 @@ body{
 
 .slideCol{
   position: absolute;
+  -moz-transition: all 1.5s;
+  -webkit-transition: all 1.5s;
+  -o-transition: all 1.5s;
+  transition: all 1.5s;
 }
