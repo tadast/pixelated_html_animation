@@ -11,27 +11,12 @@ class Column
       dot.className += " full" if dotCode > 0
       @domElm.appendChild(dot)
 
-  next: (exitState, compensate = 1) ->
-    if exitState
-      @advance(compensate)
-    else if !@reachedDestination()
-      @advance(compensate)
-      @right = Math.min(@right, @destination)
-    else
-      @right = @destination
-    @domElm.style.right = "#{@right}px"
+  enter: ->
+    @domElm.style.right = "#{@destination}px"
 
-
-  advance: (compensate) ->
-    @right = @right + (@size * @speed * compensate)
+  leave: ->
+    @domElm.style.right = "#{-@right * 2 + @sceneWidth}px"
 
   calculatePositions: ->
-    @initialPosition = -(6 * @position * @position) / 6
+    @right = -(6 * @position * @position) - @size
     @destination = @sceneWidth / 2 + (@totalPositions / 2 - @position) * @size
-    @right = @initialPosition
-
-  reachedDestination: ->
-    @right >= @destination
-
-  reachedEnd: ->
-    @right > @sceneWidth

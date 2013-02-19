@@ -3,6 +3,7 @@ class Slide
     @elm = document.getElementById(@elmId)
     @cols = [] # we'll keep vertical lines of dots in columns
     @pauseLength = 1000
+    @animLength = 2000 # is set in css for now
     @init()
 
   # loads and adds the dots
@@ -16,35 +17,19 @@ class Slide
     @cols.push(col)
 
   start: ->
-    @lastFrame = Date.now()
-    requestAnimFrame( => @advanceFrame())
+    enter = => @enter()
+    window.setTimeout enter, 500
 
-  resume: ->
-    @pauseDone = true
-    @start()
 
-  advanceFrame: ->
-    compFactor = @compFactor()
-    console.log compFactor
+
+  enter: ->
+    console.log "entering"
     for col in @cols
-      col.next(@pauseDone, compFactor)
+      col.enter()
+    leave = => @leave()
+    window.setTimeout leave, @pauseLength + @animLength
 
-    if @pauseDone
-      if @cols[@cols.length - 1].reachedEnd()
-        @cols = []
-        console.log "boom"
-        # TODO remove dom elements
-      else
-        requestAnimFrame( => @advanceFrame())
-    else
-      if !@cols[@cols.length - 1].reachedDestination()
-        requestAnimFrame( => @advanceFrame())
-      else
-        resume = =>@resume()
-        window.setTimeout resume, @pauseLength
-
-  compFactor: ->
-    now = Date.now()
-    delta = now - @lastFrame
-    @lastFrame = now
-    delta / 17
+  leave: ->
+    console.log "leaving"
+    for col in @cols
+      col.leave()
