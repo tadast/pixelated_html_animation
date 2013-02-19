@@ -24,33 +24,15 @@ Column = (function() {
       this.domElm.appendChild(dot);
     }
   }
-  Column.prototype.next = function(exitState, compensate) {
-    if (compensate == null) {
-      compensate = 1;
-    }
-    if (exitState) {
-      this.advance(compensate);
-    } else if (!this.reachedDestination()) {
-      this.advance(compensate);
-      this.right = Math.min(this.right, this.destination);
-    } else {
-      this.right = this.destination;
-    }
-    return this.domElm.style.right = "" + this.right + "px";
+  Column.prototype.enter = function() {
+    return this.domElm.style.right = "" + this.destination + "px";
   };
-  Column.prototype.advance = function(compensate) {
-    return this.right = this.right + (this.size * this.speed * compensate);
+  Column.prototype.leave = function() {
+    return this.domElm.style.right = "" + (-this.right * 2 + this.sceneWidth) + "px";
   };
   Column.prototype.calculatePositions = function() {
-    this.initialPosition = -(6 * this.position * this.position) / 6;
-    this.destination = this.sceneWidth / 2 + (this.totalPositions / 2 - this.position) * this.size;
-    return this.right = this.initialPosition;
-  };
-  Column.prototype.reachedDestination = function() {
-    return this.right >= this.destination;
-  };
-  Column.prototype.reachedEnd = function() {
-    return this.right > this.sceneWidth;
+    this.right = -(6 * this.position * this.position) - this.size;
+    return this.destination = this.sceneWidth / 2 + (this.totalPositions / 2 - this.position) * this.size;
   };
   return Column;
 })();

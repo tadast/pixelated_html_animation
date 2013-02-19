@@ -7,6 +7,7 @@ Slide = (function() {
     this.elm = document.getElementById(this.elmId);
     this.cols = [];
     this.pauseLength = 1000;
+    this.animLength = 2000;
     this.init();
   }
   Slide.prototype.init = function() {
@@ -24,52 +25,35 @@ Slide = (function() {
     return this.cols.push(col);
   };
   Slide.prototype.start = function() {
-    this.lastFrame = Date.now();
-    return requestAnimFrame(__bind(function() {
-      return this.advanceFrame();
-    }, this));
+    var enter;
+    enter = __bind(function() {
+      return this.enter();
+    }, this);
+    return window.setTimeout(enter, 500);
   };
-  Slide.prototype.resume = function() {
-    this.pauseDone = true;
-    return this.start();
-  };
-  Slide.prototype.advanceFrame = function() {
-    var col, compFactor, resume, _i, _len, _ref;
-    compFactor = this.compFactor();
-    console.log(compFactor);
+  Slide.prototype.enter = function() {
+    var col, leave, _i, _len, _ref;
+    console.log("entering");
     _ref = this.cols;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       col = _ref[_i];
-      col.next(this.pauseDone, compFactor);
+      col.enter();
     }
-    if (this.pauseDone) {
-      if (this.cols[this.cols.length - 1].reachedEnd()) {
-        this.cols = [];
-        return console.log("boom");
-      } else {
-        return requestAnimFrame(__bind(function() {
-          return this.advanceFrame();
-        }, this));
-      }
-    } else {
-      if (!this.cols[this.cols.length - 1].reachedDestination()) {
-        return requestAnimFrame(__bind(function() {
-          return this.advanceFrame();
-        }, this));
-      } else {
-        resume = __bind(function() {
-          return this.resume();
-        }, this);
-        return window.setTimeout(resume, this.pauseLength);
-      }
-    }
+    leave = __bind(function() {
+      return this.leave();
+    }, this);
+    return window.setTimeout(leave, this.pauseLength + this.animLength);
   };
-  Slide.prototype.compFactor = function() {
-    var delta, now;
-    now = Date.now();
-    delta = now - this.lastFrame;
-    this.lastFrame = now;
-    return delta / 17;
+  Slide.prototype.leave = function() {
+    var col, _i, _len, _ref, _results;
+    console.log("leaving");
+    _ref = this.cols;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      col = _ref[_i];
+      _results.push(col.leave());
+    }
+    return _results;
   };
   return Slide;
 })();
