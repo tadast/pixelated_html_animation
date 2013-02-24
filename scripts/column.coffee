@@ -4,7 +4,7 @@ class Column
     @domElm = document.createElement('div')
     @domElm.setAttribute('class', 'slideCol')
     @domElm.setAttribute('data-col', position)
-    @domElm.style.right = "#{@right}px"
+    @domElm.style.right = "#{@startPoint}px"
     for dotCode in @dotCodes
       dot = document.createElement('div')
       dot.setAttribute('class', 'slideDot')
@@ -12,11 +12,13 @@ class Column
       @domElm.appendChild(dot)
 
   enter: ->
-    @domElm.style.right = "#{@destination}px"
+    @domElm.style.right = "#{@middlePoint}px"
 
   leave: ->
-    @domElm.style.right = "#{-@right * 2 + @sceneWidth}px"
+    @domElm.style.right = "#{@finalPoint}px"
 
   calculatePositions: ->
-    @right = -(6 * @position * @position) - @size
-    @destination = @sceneWidth / 2 + (@totalPositions / 2 - @position) * @size
+    @startPoint = -(6 * @position * @position) - @size
+    @middlePoint = @sceneWidth / 2 + (@totalPositions / 2 - @position) * @size
+    exitPosition = @totalPositions - @position
+    @finalPoint = @sceneWidth + (6 * exitPosition * exitPosition) + @size
