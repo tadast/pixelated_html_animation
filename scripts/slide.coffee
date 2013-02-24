@@ -23,13 +23,13 @@ class Slide
 
 
   enter: ->
-    console.log "entering"
+    # console.log "entering"
     for col in @cols
       col.enter()
     leave = => @leave()
     window.setTimeout leave, @pauseLength + @animLength
 
   leave: ->
-    console.log "leaving"
+    # console.log "leaving"
     for col in @cols
       col.leave()
