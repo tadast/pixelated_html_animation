@@ -33,7 +33,6 @@ Slide = (function() {
   };
   Slide.prototype.enter = function() {
     var col, leave, _i, _len, _ref;
-    console.log("entering");
     _ref = this.cols;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       col = _ref[_i];
@@ -46,7 +45,6 @@ Slide = (function() {
   };
   Slide.prototype.leave = function() {
     var col, _i, _len, _ref, _results;
-    console.log("leaving");
     _ref = this.cols;
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

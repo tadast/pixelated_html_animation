@@ -12,7 +12,7 @@ Column = (function() {
     this.domElm = document.createElement('div');
     this.domElm.setAttribute('class', 'slideCol');
     this.domElm.setAttribute('data-col', position);
-    this.domElm.style.right = "" + this.right + "px";
+    this.domElm.style.right = "" + this.startPoint + "px";
     _ref = this.dotCodes;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       dotCode = _ref[_i];
@@ -25,14 +25,17 @@ Column = (function() {
     }
   }
   Column.prototype.enter = function() {
-    return this.domElm.style.right = "" + this.destination + "px";
+    return this.domElm.style.right = "" + this.middlePoint + "px";
   };
   Column.prototype.leave = function() {
-    return this.domElm.style.right = "" + (-this.right * 2 + this.sceneWidth) + "px";
+    return this.domElm.style.right = "" + this.finalPoint + "px";
   };
   Column.prototype.calculatePositions = function() {
-    this.right = -(6 * this.position * this.position) - this.size;
-    return this.destination = this.sceneWidth / 2 + (this.totalPositions / 2 - this.position) * this.size;
+    var exitPosition;
+    this.startPoint = -(6 * this.position * this.position) - this.size;
+    this.middlePoint = this.sceneWidth / 2 + (this.totalPositions / 2 - this.position) * this.size;
+    exitPosition = this.totalPositions - this.position;
+    return this.finalPoint = this.sceneWidth + (6 * exitPosition * exitPosition) + this.size;
   };
   return Column;
 })();
