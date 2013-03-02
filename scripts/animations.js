@@ -9,17 +9,33 @@ window.requestAnimFrame = (function() {
   };
 })();
 window.onload = function() {
-  var cup_anim, frame_anim;
-  cat = new Slide('slide', cat);
-  cat.start();
-  frame = new Slide('slide', frame);
+  var cat_anim, cup_anim, frame_anim, hide_paragraph, logo, logo_anim, paragraph;
+  paragraph = new Paragraph('learn');
+  logo = new Logo('mainLogo');
+  logo.appear();
+  logo_anim = __bind(function() {
+    return logo.dissapear();
+  }, this);
+  window.setTimeout(logo_anim, 5000);
+  cat = new Slide('slide', cat, paragraph, "tossing cats");
+  cat_anim = __bind(function() {
+    cat.start();
+    return paragraph.appear();
+  }, this);
+  window.setTimeout(cat_anim, 6000);
+  frame = new Slide('slide', frame, paragraph, "breaking windows");
   frame_anim = __bind(function() {
     return frame.start();
   }, this);
-  window.setTimeout(frame_anim, 6000);
-  cup = new Slide('slide', cup);
+  window.setTimeout(frame_anim, 12000);
+  cup = new Slide('slide', cup, paragraph, "brewing beer");
   cup_anim = __bind(function() {
     return cup.start();
   }, this);
-  return window.setTimeout(cup_anim, 12000);
+  window.setTimeout(cup_anim, 18000);
+  hide_paragraph = __bind(function() {
+    paragraph.disappear();
+    return logo.appear();
+  }, this);
+  return window.setTimeout(hide_paragraph, 25000);
 };

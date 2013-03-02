@@ -1,12 +1,14 @@
 var Slide;
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 Slide = (function() {
-  function Slide(elmId, matrix) {
+  function Slide(elmId, matrix, paragraph, text) {
     this.elmId = elmId;
     this.matrix = matrix;
+    this.paragraph = paragraph;
+    this.text = text;
     this.elm = document.getElementById(this.elmId);
     this.cols = [];
-    this.pauseLength = 1000;
+    this.pauseLength = 3000;
     this.animLength = 2000;
     this.init();
   }
@@ -38,6 +40,7 @@ Slide = (function() {
       col = _ref[_i];
       col.enter();
     }
+    this.paragraph.setText(this.text);
     leave = __bind(function() {
       return this.leave();
     }, this);
