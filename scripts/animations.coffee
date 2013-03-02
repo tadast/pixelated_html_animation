@@ -90,13 +90,32 @@ window.requestAnimFrame = (->
 )()
 
 window.onload = ->
-  cat = new Slide('slide', cat)
-  cat.start()
+  paragraph = new Paragraph('learn')
 
-  frame = new Slide('slide', frame)
+  logo = new Logo('mainLogo')
+  logo.appear()
+
+  logo_anim = => logo.dissapear()
+  window.setTimeout logo_anim, 5000
+
+  cat = new Slide('slide', cat, paragraph, "tossing cats")
+
+  cat_anim = =>
+    cat.start()
+    paragraph.appear()
+
+  window.setTimeout cat_anim, 6000
+
+  frame = new Slide('slide', frame, paragraph, "breaking windows")
   frame_anim = => frame.start()
-  window.setTimeout frame_anim, 6000
+  window.setTimeout frame_anim, 12000
 
-  cup = new Slide('slide', cup)
+  cup = new Slide('slide', cup, paragraph, "brewing beer")
   cup_anim = => cup.start()
-  window.setTimeout cup_anim, 12000
+  window.setTimeout cup_anim, 18000
+
+  hide_paragraph = =>
+    paragraph.disappear()
+    logo.appear()
+
+  window.setTimeout hide_paragraph, 25000

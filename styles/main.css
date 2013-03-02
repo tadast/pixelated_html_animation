@@ -1,8 +1,11 @@
+html{
+  width: 100%;
+  height: 100%;
+}
+
 html, body{
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
 }
 
 body{
@@ -13,6 +16,10 @@ body{
   background-image: -ms-radial-gradient(center center, closest-side circle, #de9478 0%, #c54429 164%);
   background-image: -o-radial-gradient(center center, closest-side circle, #de9478 0%, #c54429 164%);
   background-image: radial-gradient(closest-side circle at center center, #de9478 0%, #c54429 164%);
+
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
 #container{
@@ -48,7 +55,8 @@ body{
   box-shadow: 0 1px 2px #333;
 }
 
-.slideCol{
+.animates{
+  /* Performance tricks */
   -webkit-transform: translatez(0);
   -moz-transform: translatez(0);
   -ms-transform: translatez(0);
@@ -64,10 +72,44 @@ body{
   -moz-perspective: 1000;
   -o-perspective: 1000;
   perspective: 1000;
+}
 
+.slideCol{
   position: absolute;
   -moz-transition: all 1.5s;
   -webkit-transition: all 1.5s;
   -o-transition: all 1.5s;
   transition: all 1.5s;
+}
+
+#mainLogo{
+  color: white;
+  opacity: 0;
+  font-size: 4em;
+  position: absolute;
+  bottom: -50px;
+  width: 100%;
+
+  -moz-transition: all 2.5s;
+  -webkit-transition: all 2.5s;
+  -o-transition: all 2.5s;
+  transition: all 2.5s;
+}
+#learn{
+  text-shadow: 0 1px 2px #333;
+  font-size: 1.2em;
+  margin: 0;
+  opacity: 0;
+
+  -moz-transition: all 1.75s;
+  -webkit-transition: all 1.75s;
+  -o-transition: all 1.75s;
+  transition: all 1.75s;
+}
+#learn em{
+  color: #f2c75d;
+  font-style: normal;
+  width: 180px;
+  text-align: left;
+  display: inline-block;
 }
